@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Supported Assessment Platform</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax for rendering math expressions -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col font-sans">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="showSection('hub')">
+                    <div class="bg-blue-600 text-white p-2 rounded-lg font-bold text-xl flex items-center justify-center w-10 h-10 shadow-md">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <span class="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white">AI Assessment <span class="text-blue-600">Platform</span></span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="showSection('hub')" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 transition">Assignment Hub</button>
+                    <button id="themeToggle" onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition">
+                        <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto p-4 sm:p-6 md:p-8">
+
+        <!-- ASSIGNMENT HUB / NAVIGATION SECTIONS -->
+        <section id="hubSection" class="space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="px-3 py-1 text-xs font-bold bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full">AI-Supported Assessment Platform</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Digital Assessment & Feedback Portal</h1>
+                <p class="text-slate-600 dark:text-slate-400 text-base">This platform showcases AI integration in education, featuring a 10-question math quiz, AI-generated student feedback analysis, prompts, and pedagogical reflection.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
+                <!-- Card 1: Quiz & AI Assessment -->
+                <div onclick="showSection('quizHub')" class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-blue-500 transition cursor-pointer flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500 text-white flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition">Section 1: AI for Assessment</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Interactive 10-question math quiz generated via AI tool, answer key, and prompts.</p>
+                        </div>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-slate-100 dark:border-slate-700/60 flex justify-between items-center text-xs font-semibold text-blue-600">
+                        <span>Take Quiz / View Key</span>
+                        <span>Open <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                    </div>
+                </div>
+
+                <!-- Card 2: AI Feedback -->
+                <div onclick="showSection('feedbackSection')" class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 transition">Section 2: AI-Supported Feedback</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Sample student answers (strong, average, weak), AI feedback, and teacher improvements.</p>
+                        </div>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-slate-100 dark:border-slate-700/60 flex justify-between items-center text-xs font-semibold text-emerald-600">
+                        <span>View Analysis</span>
+                        <span>Open <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Prompts & Reflection -->
+                <div onclick="showSection('reflectionSection')" class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-purple-500 transition cursor-pointer flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500 text-white flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-purple-600 transition">Prompts & Reflection</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Exact AI prompts used and a 100-150 word critical pedagogical reflection.</p>
+                        </div>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-slate-100 dark:border-slate-700/60 flex justify-between items-center text-xs font-semibold text-purple-600">
+                        <span>Read Reflection</span>
+                        <span>Open <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: QUIZ HUB (Intro / Start) -->
+        <section id="quizHub" class="hidden space-y-6 max-w-3xl mx-auto">
+            <button onclick="showSection('hub')" class="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 font-semibold text-sm transition">
+                <i class="fa-solid fa-arrow-left"></i> Back to Hub
+            </button>
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 text-center space-y-6">
+                <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/40 text-blue-600 rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+                <div class="space-y-2">
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Section 1: AI for Assessment (Math Quiz)</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm max-w-lg mx-auto">This digital 10-question math assessment was generated using Gemini AI. It tests arithmetic, equations, geometry, and quadratics with varying difficulties.</p>
+                </div>
+                <div class="flex justify-center gap-4 pt-2">
+                    <button onclick="startQuiz()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-md transition">
+                        <i class="fa-solid fa-play mr-2"></i> Start Interactive Quiz
+                    </button>
+                    <button onclick="showSection('answerKeySection')" class="px-6 py-3 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-800 dark:text-white font-semibold rounded-xl transition">
+                        <i class="fa-solid fa-key mr-2"></i> View Answer Key
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE QUIZ SCREEN -->
+        <section id="quizScreen" class="hidden max-w-3xl mx-auto space-y-6">
+            <div class="flex items-center justify-between bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+                <button onclick="showSection('quizHub')" class="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 font-semibold text-sm transition">
+                    <i class="fa-solid fa-arrow-left"></i> Exit Quiz
+                </button>
+                <div id="quizCounter" class="text-xs font-bold px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full"></div>
+            </div>
+
+            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 space-y-6">
+                <div class="flex justify-between items-start gap-4">
+                    <h2 id="questionText" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-relaxed"></h2>
+                    <span id="difficultyBadge" class="px-2.5 py-1 text-xs font-semibold rounded-md uppercase tracking-wider shrink-0"></span>
+                </div>
+
+                <div id="optionsContainer" class="space-y-3"></div>
+
+                <div id="explanationBox" class="hidden p-4 rounded-xl border bg-slate-50 dark:bg-slate-900/50 space-y-2">
+                    <div class="font-bold text-sm flex items-center gap-2" id="explanationHeader"></div>
+                    <div id="explanationText" class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed"></div>
+                </div>
+
+                <div class="flex justify-between items-center pt-2">
+                    <button id="prevBtn" onclick="prevQuestion()" class="px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition disabled:opacity-40 disabled:pointer-events-none">
+                        <i class="fa-solid fa-chevron-left mr-1"></i> Previous
+                    </button>
+                    <button id="nextBtn" onclick="nextQuestion()" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition disabled:opacity-40 disabled:pointer-events-none">
+                        Next <i class="fa-solid fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ RESULTS SCREEN -->
+        <section id="resultScreen" class="hidden max-w-3xl mx-auto space-y-8">
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 text-center space-y-6">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 text-3xl font-extrabold shadow-inner" id="scoreIcon">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div class="space-y-1">
+                    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white" id="resultGradeText">Quiz Completed!</h2>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">Here is your performance summary.</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 max-w-xs mx-auto pt-2">
+                    <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700/50">
+                        <div class="text-xs text-slate-500">Total Score</div>
+                        <div class="text-xl font-extrabold text-blue-600" id="finalScore">0 / 10</div>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700/50">
+                        <div class="text-xs text-slate-500">Accuracy</div>
+                        <div class="text-xl font-extrabold text-emerald-600" id="finalPercentage">0%</div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-4 pt-4">
+                    <button onclick="startQuiz()" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition">Retake Quiz</button>
+                    <button onclick="showSection('answerKeySection')" class="px-6 py-2.5 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white font-semibold rounded-lg transition">View Answer Key</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ANSWER KEY SECTION -->
+        <section id="answerKeySection" class="hidden max-w-3xl mx-auto space-y-6">
+            <button onclick="showSection('quizHub')" class="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 font-semibold text-sm transition">
+                <i class="fa-solid fa-arrow-left"></i> Back to Assessment Hub
+            </button>
+            <div class="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 space-y-6">
+                <div class="border-b border-slate-200 dark:border-slate-700 pb-4">
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Official Quiz Answer Key</h2>
+                    <p class="text-xs text-slate-500 mt-1">Detailed solutions for all 10 AI-generated questions.</p>
+                </div>
+                <div id="answerKeyList" class="space-y-4"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: AI-SUPPORTED FEEDBACK -->
+        <section id="feedbackSection" class="hidden max-w-4xl mx-auto space-y-6">
+            <button onclick="showSection('hub')" class="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 font-semibold text-sm transition">
+                <i class="fa-solid fa-arrow-left"></i> Back to Hub
+            </button>
+            <div class="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 space-y-6">
+                <div class="border-b border-slate-200 dark:border-slate-700 pb-4">
+                    <span class="px-3 py-1 text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300 rounded-full">Assignment Requirement 2</span>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-2">Section 2: AI-Supported Feedback Analysis</h2>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Analysis of student answers for Quiz Question #4: <strong>"Solve for $x$: $3x - 5 = 16$"</strong>. Comparing raw AI feedback against the teacher's critical review.</p>
+                </div>
+
+                <div class="space-y-6" id="studentFeedbackContainer">
+                    <!-- Feedback Item 1 -->
+                    <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/40 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2"><i class="fa-solid fa-user-graduate text-blue-500"></i> Student A (Strong Answer)</h3>
+                            <span class="px-2 py-0.5 text-xs font-semibold bg-emerald-100 text-emerald-800 rounded">Correct ($x = 7$)</span>
+                        </div>
+                        <p class="text-sm italic text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 p-3 rounded border border-slate-100 dark:border-slate-700">"First I added 5 to both sides: 3x = 16 + 5 = 21. Then I divided by 3, so x = 7."</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                            <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded border border-blue-100 dark:border-blue-900/50 text-xs space-y-1">
+                                <strong class="text-blue-700 dark:text-blue-400 block"><i class="fa-solid fa-robot mr-1"></i> Raw AI Feedback:</strong>
+                                <p class="text-slate-600 dark:text-slate-300">"Excellent work! Your steps are clear and mathematically sound. You correctly isolated the variable term first and found $x = 7$. Full points."</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-100 dark:border-emerald-900/50 text-xs space-y-1">
+                                <strong class="text-emerald-700 dark:text-emerald-400 block"><i class="fa-solid fa-chalkboard-user mr-1"></i> Teacher Improvement & Note:</strong>
+                                <p class="text-slate-600 dark:text-slate-300"><strong>What I changed:</strong> AI feedback was positive but generic. I added encouragement to try checking the answer by substitution ($3(7)-5 = 16$) to reinforce verification habits.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Item 2 -->
+                    <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/40 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2"><i class="fa-solid fa-user-graduate text-amber-500"></i> Student B (Average Answer / Calculation Error)</h3>
+                            <span class="px-2 py-0.5 text-xs font-semibold bg-amber-100 text-amber-800 rounded">Partial Error ($x = 8$)</span>
+                        </div>
+                        <p class="text-sm italic text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 p-3 rounded border border-slate-100 dark:border-slate-700">"I moved 5 over, so 3x = 15. Then x = 15 / 3 = 5... wait, 16 + 5 is 21, so 3x = 21, x = 8."</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                            <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded border border-blue-100 dark:border-blue-900/50 text-xs space-y-1">
+                                <strong class="text-blue-700 dark:text-blue-400 block"><i class="fa-solid fa-robot mr-1"></i> Raw AI Feedback:</strong>
+                                <p class="text-slate-600 dark:text-slate-300">"You made a minor arithmetic error. $16 + 5$ is 21, not 15 or 24. Review your addition."</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-100 dark:border-emerald-900/50 text-xs space-y-1">
+                                <strong class="text-emerald-700 dark:text-emerald-400 block"><i class="fa-solid fa-chalkboard-user mr-1"></i> Teacher Improvement & Note:</strong>
+                                <p class="text-slate-600 dark:text-slate-300"><strong>What I changed:</strong> AI spotted the arithmetic slip but didn't address the student's confused self-correction loop. I added guidance on neat step-by-step lining to prevent cognitive clutter.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Item 3 -->
+                    <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/40 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2"><i class="fa-solid fa-user-graduate text-rose-500"></i> Student C (Weak Answer / Conceptual Misconception)</h3>
+                            <span class="px-2 py-0.5 text-xs font-semibold bg-rose-100 text-rose-800 rounded">Incorrect ($x = 3.6$)</span>
+                        </div>
+                        <p class="text-sm italic text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 p-3 rounded border border-slate-100 dark:border-slate-700">"I divided 16 by 3 first, then added 5."</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                            <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded border border-blue-100 dark:border-blue-900/50 text-xs space-y-1">
+                                <strong class="text-blue-700 dark:text-blue-400 block"><i class="fa-solid fa-robot mr-1"></i> Raw AI Feedback:</strong>
+                                <p class="text-slate-600 dark:text-slate-300">"Incorrect. You performed the operations in the wrong order. You must isolate the variable term by adding 5 first before dividing."</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded border border-emerald-100 dark:border-emerald-900/50 text-xs space-y-1">
+                                <strong class="text-emerald-700 dark:text-emerald-400 block"><i class="fa-solid fa-chalkboard-user mr-1"></i> Teacher Improvement & Note:</strong>
+                                <p class="text-slate-600 dark:text-slate-300"><strong>What I changed:</strong> AI gave a blunt correction. I softened the tone and added a scaffolding hint: <em>"Remember the inverse operations rule: undo subtraction/addition before multiplication/division."</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PROMPTS & REFLECTION -->
+        <section id="reflectionSection" class="hidden max-w-3xl mx-auto space-y-6">
+            <button onclick="showSection('hub')" class="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 font-semibold text-sm transition">
+                <i class="fa-solid fa-arrow-left"></i> Back to Hub
+            </button>
+            <div class="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 space-y-6">
+                <div>
+                    <span class="px-3 py-1 text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 rounded-full">Assignment Requirements 1 & 3</span>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-2">AI Prompts & Pedagogical Reflection</h2>
+                </div>
+
+                <!-- Prompts Used -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200"><i class="fa-solid fa-terminal text-blue-500 mr-2"></i> 1. Prompts Given to AI</h3>
+                    <div class="p-4 bg-slate-50 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-700 text-xs space-y-3">
+                        <div>
+                            <strong class="text-blue-600 dark:text-blue-400 block">Prompt for Section 1 (Quiz Generation):</strong>
+                            <p class="italic text-slate-700 dark:text-slate-300 mt-1">"Create a 10-question mathematics quiz with varying difficulty levels (easy, medium, hard) covering arithmetic, equations, geometry, and quadratics. Format as multiple-choice questions with 4 options and provide a detailed answer key."</p>
+                        </div>
+                        <div>
+                            <strong class="text-emerald-600 dark:text-emerald-400 block">Prompt for Section 2 (Feedback Generation):</strong>
+                            <p class="italic text-slate-700 dark:text-slate-300 mt-1">"Act as a supportive math teacher. Generate formative feedback for three student answers to the linear equation $3x - 5 = 16$: one strong answer ($x=7$), one average answer with an arithmetic slip, and one weak answer with a conceptual reverse-order error."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reflection -->
+                <div class="space-y-3 pt-2">
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200"><i class="fa-solid fa-lightbulb text-amber-500 mr-2"></i> 2. Critical Reflection (100-150 words)</h3>
+                    <div class="p-5 bg-blue-50/50 dark:bg-slate-900/50 rounded-xl border border-blue-100 dark:border-slate-700 text-sm leading-relaxed text-slate-700 dark:text-slate-300 space-y-3">
+                        <p>AI significantly accelerated content creation by instantly generating a structured 10-question mathematics quiz and draft feedback across multiple student performance tiers. This saved considerable time in test design and differentiated response drafting.</p>
+                        <p>However, AI fell short in pedagogical empathy and contextual nuance. The raw feedback generated for weak students was overly blunt and lacked developmental scaffolding, failing to address the underlying cognitive misconceptions. Furthermore, LaTeX mathematical rendering required manual verification to prevent formatting bugs.</p>
+                        <p>Next time, I would incorporate stricter prompt engineering guidelines to enforce a growth-mindset tone in AI outputs and use automated rubric-based constraints to ensure higher formative depth before teacher review.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+        <p>© 2026 AI Assessment Platform • Built for Educational Technology Assignment</p>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const quizData = [
+            { q: "Calculate the value: $5 + 3 \\times 2 - 4$", options: ["12", "7", "10", "16"], correct: 1, diff: "easy", exp: "Using PEMDAS, calculate multiplication first: $3 \\times 2 = 6$. Then addition/subtraction: $5 + 6 - 4 = 7$." },
+            { q: "Convert the fraction $\\frac{3}{4}$ to a decimal.", options: ["0.75", "0.25", "0.50", "0.80"], correct: 0, diff: "easy", exp: "Divide numerator by denominator: $3 \\div 4 = 0.75$." },
+            { q: "What is $15\\%$ of $80$?", options: ["12", "10", "15", "20"], correct: 0, diff: "easy", exp: "Multiply decimal representation by total: $0.15 \\times 80 = 12$." },
+            { q: "Solve for $x$: $3x - 5 = 16$", options: ["$x = 7$", "$x = 5$", "$x = 8$", "$x = 9$"], correct: 0, diff: "medium", exp: "Add $5$ to both sides: $3x = 21$. Divide by $3$: $x = 7$." },
+            { q: "Find the area of a circle with radius $r = 7\\text{ cm}$ (use $\\pi \\approx \\frac{22}{7}$).", options: ["$154\\text{ cm}^2$", "$44\\text{ cm}^2$", "$88\\text{ cm}^2$", "$308\\text{ cm}^2$"], correct: 0, diff: "medium", exp: "Formula: $A = \\pi r^2 = \\frac{22}{7} \\times 49 = 154\\text{ cm}^2$." },
+            { q: "Simplify expression: $(2^3)^2 \\div 4$", options: ["16", "4", "8", "32"], correct: 0, diff: "medium", exp: "$2^3 = 8$, $8^2 = 64$, $64 \\div 4 = 16$." },
+            { q: "If 5 workers complete a task in 12 days, how long will 3 workers take?", options: ["20 days", "15 days", "18 days", "25 days"], correct: 0, diff: "medium", exp: "Inverse proportion: $5 \\times 12 = 60$ worker-days. $60 \\div 3 = 20$ days." },
+            { q: "Find roots of quadratic equation: $x^2 - 5x + 6 = 0$", options: ["$x = 2, 3$", "$x = 1, 6$", "$x = -2, -3$", "$x = -1, -6$"], correct: 0, diff: "hard", exp: "Factor: $(x-2)(x-3) = 0 \\Rightarrow x = 2, 3$." },
+            { q: "Given function $f(x) = 2x^2 - 3x + 1$, calculate $f(-2)$.", options: ["15", "11", "3", "-1"], correct: 0, diff: "hard", exp: "Substitute $-2$: $2(-2)^2 - 3(-2) + 1 = 2(4) + 6 + 1 = 15$." },
+            { q: "In a right triangle, if a leg is $6\\text{ cm}$ and hypotenuse is $10\\text{ cm}$, find the other leg.", options: ["$8\\text{ cm}$", "$6\\text{ cm}$", "$7\\text{ cm}$", "$9\\text{ cm}$"], correct: 0, diff: "hard", exp: "Pythagorean theorem: $6^2 + b^2 = 10^2 \\Rightarrow 36 + b^2 = 100 \\Rightarrow b = 8$." }
+        ];
+
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+
+        function showSection(sectionId) {
+            ['hubSection', 'quizHub', 'quizScreen', 'resultScreen', 'answerKeySection', 'feedbackSection', 'reflectionSection'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (sectionId === 'answerKeySection') renderAnswerKey();
+        }
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            showSection('quizScreen');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = quizData[currentQuestionIndex];
+            document.getElementById('quizCounter').innerText = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
+            document.getElementById('progressBar').style.width = `${((currentQuestionIndex + 1) / quizData.length) * 100}%`;
+
+            const badge = document.getElementById('difficultyBadge');
+            badge.innerText = q.diff;
+            badge.className = `px-2.5 py-1 text-xs font-semibold rounded-md uppercase tracking-wider shrink-0 ${
+                q.diff === 'easy' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
+                q.diff === 'medium' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
+                'bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300'
+            }`;
+
+            document.getElementById('questionText').innerHTML = q.q;
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            
+            const hasAnswered = userAnswers[currentQuestionIndex] !== null;
+            const selectedIdx = userAnswers[currentQuestionIndex];
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full p-4 text-left rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 font-medium text-slate-800 dark:text-slate-200 transition flex items-center justify-between group";
+                
+                if (hasAnswered) {
+                    btn.disabled = true;
+                    if (idx === q.correct) {
+                        btn.className = "w-full p-4 text-left rounded-xl border-2 border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 font-bold text-emerald-900 dark:text-emerald-200 flex items-center justify-between";
+                        btn.innerHTML = `<span>${opt}</span> <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>`;
+                    } else if (idx === selectedIdx) {
+                        btn.className = "w-full p-4 text-left rounded-xl border-2 border-rose-500 bg-rose-50 dark:bg-rose-950/40 font-bold text-rose-900 dark:text-rose-200 flex items-center justify-between";
+                        btn.innerHTML = `<span>${opt}</span> <i class="fa-solid fa-circle-xmark text-rose-600 text-lg"></i>`;
+                    } else {
+                        btn.className = "w-full p-4 text-left rounded-xl border border-slate-200 dark:border-slate-700 opacity-50 text-slate-500 flex items-center justify-between";
+                        btn.innerHTML = `<span>${opt}</span>`;
+                    }
+                } else {
+                    btn.onclick = () => selectOption(idx);
+                    btn.innerHTML = `<span>${opt}</span> <span class="w-5 h-5 rounded-full border border-slate-300 group-hover:border-blue-500 flex items-center justify-center"></span>`;
+                }
+                container.appendChild(btn);
+            });
+
+            const expBox = document.getElementById('explanationBox');
+            if (hasAnswered) {
+                expBox.classList.remove('hidden');
+                document.getElementById('explanationHeader').innerHTML = selectedIdx === q.correct ? 
+                    `<i class="fa-solid fa-check-circle text-emerald-600"></i> Correct Answer!` : 
+                    `<i class="fa-solid fa-xmark-circle text-rose-600"></i> Incorrect.`;
+                document.getElementById('explanationText').innerHTML = `<strong>Solution:</strong> ${q.exp}`;
+            } else {
+                expBox.classList.add('hidden');
+            }
+
+            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+            document.getElementById('nextBtn').innerHTML = currentQuestionIndex === quizData.length - 1 ? 
+                `Finish Quiz <i class="fa-solid fa-flag-checkered ml-1"></i>` : 
+                `Next <i class="fa-solid fa-chevron-right ml-1"></i>`;
+
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+
+        function selectOption(index) {
+            userAnswers[currentQuestionIndex] = index;
+            renderQuestion();
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) { currentQuestionIndex--; renderQuestion(); }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) { currentQuestionIndex++; renderQuestion(); }
+            else { finishQuiz(); }
+        }
+
+        function finishQuiz() {
+            let correctCount = 0;
+            quizData.forEach((q, idx) => { if (userAnswers[idx] === q.correct) correctCount++; });
+            const percentage = Math.round((correctCount / quizData.length) * 100);
+
+            document.getElementById('finalScore').innerText = `${correctCount} / ${quizData.length}`;
+            document.getElementById('finalPercentage').innerText = `${percentage}%`;
+
+            showSection('resultScreen');
+        }
+
+        function renderAnswerKey() {
+            const list = document.getElementById('answerKeyList');
+            list.innerHTML = '';
+            quizData.forEach((q, idx) => {
+                const item = document.createElement('div');
+                item.className = "p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700/50 space-y-2 text-sm";
+                item.innerHTML = `
+                    <div class="font-bold text-slate-900 dark:text-white">Q${idx + 1}. ${q.q}</div>
+                    <div class="text-emerald-600 dark:text-emerald-400 font-semibold">Correct Option: ${q.options[q.correct]}</div>
+                    <div class="text-xs text-slate-600 dark:text-slate-400"><strong>Explanation:</strong> ${q.exp}</div>
+                `;
+                list.appendChild(item);
+            });
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        }
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
